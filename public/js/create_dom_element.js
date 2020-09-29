@@ -1,5 +1,5 @@
 'use strict';
-
+/* The template, that hepls to create DOM Element quickly */
 export default ({
     elementClasses = [],
     elementType = 'div',

@@ -1,5 +1,7 @@
 'use strict';
 
+/* The Funktion, that converts milliseconds to 
+days, hours, minutes, seconds */
 export function convertMS(milliseconds) {
     let day, hour, minute, seconds;
     seconds = Math.floor(milliseconds / 1000);

@@ -4,7 +4,7 @@ import createDOMElement from './create_dom_element.js';
 import { openSidebar } from './sidebar.js';
 import { convertMS } from './convert_ms.js';
 
-//Open street map tile layer
+//Add open street map tile layer
 let tileUrlOSM = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
 let layerOSM = new L.TileLayer(tileUrlOSM, { maxZoom: 18 });
 
@@ -16,12 +16,16 @@ let map = new L.Map('mapid', {
 // add 1 layer to the map
 map.addLayer(layerOSM);
 
-//socket
+/* The Timer in the sidebar Element will be created. This is 
+the time, which left untill the current project will be finished */
 let timerBox = document.querySelector('#timer');
 
 let socket = io();
 let projectDate;
 
+/* The function, that creates the timer.
+currentTime  - current time, which we get from the server 
+side (websocket) */
 function createTimer(currentTime) {
     let timeLeftMlsc = new Date(projectDate).getTime() - new Date(currentTime).getTime();
     let timeLeft = convertMS(timeLeftMlsc);
@@ -40,7 +44,7 @@ function createTimer(currentTime) {
 }
 
 socket.on('time', function (data) {
-    timerBox.innerHTML = '';    
+    timerBox.innerHTML = '';
     createTimer(data.time);
 });
 
@@ -49,9 +53,9 @@ const getDataDB = () => {
     fetch('/getdata').then(
         answer => answer.json()
     ).then(
-        JSONdata => {            
-            JSONdata.data.forEach(project => {   
-                console.log(project.properties);             
+        JSONdata => {
+            JSONdata.data.forEach(project => {
+                console.log(project.properties);
                 let projectProperties = project.properties;
                 let latitude = project.geometry.coordinates[0];
                 let longitude = project.geometry.coordinates[1];
@@ -77,7 +81,7 @@ let projAdress = document.querySelector('#projadress');
 let projResponsible = document.querySelector('#projresponsible');
 let projMoney = document.querySelector('#projmoney');
 let projInfo = document.querySelector('#projinfo');
-let projdate = document.querySelector('#projdate'); //queryselector
+let projdate = document.querySelector('#projdate');
 
 //add new project in modal window
 map.addEventListener('dblclick', function (el) {
@@ -119,6 +123,9 @@ map.addEventListener('dblclick', function (el) {
     projdate.value = '';
 });
 
+/* The new project will be saved in the database. 
+Latitude and longitude sind coordinates of the company, that is 
+responsible for this project */
 function saveProject(latitude, longitude) {
     let saveProjectRequest = new Request(
         '/saveProject',
@@ -176,11 +183,11 @@ function saveProject(latitude, longitude) {
 }
 
 //Donate button
- let donateBtn = document.querySelector('#donatebtn');
+let donateBtn = document.querySelector('#donatebtn');
 
 donateBtn.addEventListener('click', donate);
 function donate() {
     alert('This function is under construction :)');
-} 
+}
 
 getDataDB();

@@ -1,15 +1,16 @@
 'use strict';
 
-//Express
+//Create Express server 
 const express = require('express');
 let app = express();
 app.use(express.static('public'));
 
-// http
+//Create http server
 const http = require('http');
 let httpServer = http.Server(app);
 
-//Websocket
+//Websocket. Sends current time to the client with an 
+//interval in 500 millisec.
 const socketIO = require('socket.io')(httpServer);
 function sendTime() {
     socketIO.emit('time', { time: new Date() })
@@ -17,7 +18,7 @@ function sendTime() {
 
 setInterval(sendTime, 500);
 
-//Database
+//Database connection
 const nano = require('nano')('http://localhost:5984'); 
 let projectsDB = nano.db.use('projects');
 
