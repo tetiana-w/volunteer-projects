@@ -1,13 +1,14 @@
-
+body {
+  margin: 0;
+}
 #mapid {
-  height: 100vh/* 500px */;
+  height: 100vh;
   width: auto;
   z-index: 0;
 }
 
 #infoproject {
-  color: white;
-  /* font-family: Arial, Helvetica, sans-serif; */
+  color: white;  
   padding: 10px 20px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 15px;
@@ -58,22 +59,6 @@
   }
 }
 
-.money-box {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
-  gap: 1px 1px;
-  grid-template-areas: ". .";
-  font-size: 24pt;
-  /* text-align: center; */
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.money-box p {
-  font-size: 12pt;
-  margin-bottom: 1px;
-}
-
 button {
   background-color: #4CAF50;
   border: none;
@@ -89,7 +74,7 @@ button {
   border-radius: 4px;
 }
 
-#donatebtn {
+#participatebtn {
   background-color: rgb(83, 91, 99);
   color: white;
   border: 2px solid #4CAF50;
@@ -97,7 +82,7 @@ button {
   margin: 1rem auto;
 }
 
-#donatebtn:hover {
+#participatebtn:hover {
   background-color: #4CAF50;
   color: white;
 }
@@ -227,8 +212,7 @@ form {
 #timer {
   padding: 10px 20px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 15px;
-  line-height: 1,5;
-  color: white;
-  /* text-align: center; */
+  font-size: 2.1rem;
+  color: white; 
+  text-align: center;
 }

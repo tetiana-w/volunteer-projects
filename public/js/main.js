@@ -6,7 +6,10 @@ import { convertMS } from './convert_ms.js';
 
 //Add open street map tile layer
 let tileUrlOSM = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
-let layerOSM = new L.TileLayer(tileUrlOSM, { maxZoom: 18 });
+let layerOSM = new L.TileLayer(tileUrlOSM, {
+    maxZoom: 18,
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
+});
 
 let map = new L.Map('mapid', {
     center: new L.LatLng(51.2296937, 8.4530592, 6),
@@ -79,7 +82,6 @@ const getDataDB = () => {
 let projName = document.querySelector('#projname');
 let projAdress = document.querySelector('#projadress');
 let projResponsible = document.querySelector('#projresponsible');
-let projMoney = document.querySelector('#projmoney');
 let projInfo = document.querySelector('#projinfo');
 let projdate = document.querySelector('#projdate');
 
@@ -117,8 +119,7 @@ map.addEventListener('dblclick', function (el) {
     //Clear input fields
     projName.value = '';
     projAdress.value = '';
-    projResponsible.value = '';
-    projMoney.value = '';
+    projResponsible.value = '';   
     projInfo.value = '';
     projdate.value = '';
 });
@@ -136,8 +137,6 @@ function saveProject(latitude, longitude) {
                 type: "Feature",
                 properties: {
                     name: projName.value,
-                    money_needed: projMoney.value,
-                    money_donated: 0,
                     responsible: projResponsible.value,
                     description: projInfo.value,
                     adress: projAdress.value,
@@ -182,10 +181,10 @@ function saveProject(latitude, longitude) {
     )
 }
 
-//Donate button
-let donateBtn = document.querySelector('#donatebtn');
+//Teilnehmen button
+let participateBtn = document.querySelector('#participatebtn');
 
-donateBtn.addEventListener('click', donate);
+participateBtn.addEventListener('click', donate);
 function donate() {
     alert('This function is under construction :)');
 }

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Projects</title>
 
     <!--Leaflet-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
@@ -14,9 +14,6 @@
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
         integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
         crossorigin=""></script>
-
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
     <script src="socket.io/socket.io.js"></script>
 
@@ -34,7 +31,7 @@
         <!-- Timer -->
         <div id="timer"></div>
         <div>
-            <button id="donatebtn">Unterstützen</button>
+            <button id="participatebtn">Teilnehmen</button>
         </div>
 
     </div>
@@ -52,6 +49,7 @@
             <div class="modal-body">
 
                 <!-- Form -->
+                <!-- TODO: saving new project to Database -->
                 <form>
                     <label for="projname">Name des Projekts</label>
                     <input type="text" id="projname" placeholder="Die Name des Projekts"></input>
@@ -62,13 +60,10 @@
                     <label for="projresponsible">Verantwortlich</label>
                     <input type="text" id="projresponsible" placeholder="Verantwortlich fürs Projekt"></input>
 
-                    <label for="projmoney">Spendenziel</label>
-                    <input type="number" id="projmoney" placeholder="Spendenziel in €"></input>
-
                     <label for="projinfo">Information</label>
                     <input type="text" id="projinfo" placeholder="Info über das Projekt"></input>
 
-                    <label for="projdate">Spenden möglich bis</label>
+                    <label for="projdate">Teilnahme möglich bis</label>
                     <input type="date" id="projdate"></input>
 
                     <button id="saveproject">Hinzufügen</button>

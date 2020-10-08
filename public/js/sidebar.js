@@ -24,7 +24,6 @@ function createProjectInfo(featureProperties) {
     createProjectTitle();
     createResponsible();
     createAdress();
-    createMoneyBox();
     createDescription();
     createDateInfo();
 
@@ -51,21 +50,6 @@ function createProjectInfo(featureProperties) {
             parentElement: infoprodject
         })
     }
-    //The information about "Donations target" and "Donated money" will be created in the sidebar
-    function createMoneyBox() {
-        createDOMElement({
-            elementClasses: ['money-box'],
-            parentElement: infoprodject
-        })
-        createDOMElement({
-            content: `<p>Spendenziel</p> ${featureProperties.money_needed}€`,
-            parentElement: document.querySelector('.money-box'),
-        })
-        createDOMElement({
-            content: `<p>Bereits gespendet</p> ${featureProperties.money_donated}€`,
-            parentElement: document.querySelector('.money-box'),
-        })
-    }
     //The description of the project will be created in the sidebar
     function createDescription() {
         createDOMElement({
@@ -78,7 +62,7 @@ function createProjectInfo(featureProperties) {
     function createDateInfo() {
         createDOMElement({
             elementType: 'div',
-            content: `Spenden möglich bis ${new Date(featureProperties.date).toLocaleDateString()}`,
+            content: `Teilnehmen möglich bis ${new Date(featureProperties.date).toLocaleDateString()}`,
             parentElement: infoprodject
         })
     }
