@@ -133,8 +133,7 @@ function saveProject(latitude, longitude) {
         {
             method: 'post',
             headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({
-                type: "Feature",
+            body: JSON.stringify({                
                 properties: {
                     name: projName.value,
                     responsible: projResponsible.value,
@@ -153,16 +152,17 @@ function saveProject(latitude, longitude) {
         }
     )
     fetch(saveProjectRequest).then(
-        answer => answer.json()
+        (answer) => answer.json()
+        
     ).then(
-        //answer => console.log(answer)
-        JSONdata => {
-            JSONdata.data.forEach(el => {
+      //   answer => console.log(answer) 
+         JSONdata => { 
+            JSONdata.data.forEach(project => {  
 
-                let feature = el.features;
-                let latitude = feature.geometry.coordinates[0];
-                let longitude = feature.geometry.coordinates[1];
-                let projectName = feature.properties.name;
+                let projectProperties = project.properties;
+                let latitude = project.geometry.coordinates[0];
+                let longitude = project.geometry.coordinates[1];
+                let projectName = project.properties.name;
 
                 let projectMarker = L.marker([latitude, longitude]).addTo(map);
                 projectMarker.bindTooltip(projectName, {
@@ -171,11 +171,11 @@ function saveProject(latitude, longitude) {
                 });
 
                 projectMarker.addEventListener('click', el => {
-                    openSidebar(feature.properties);
-                    projectDate = feature.properties.date;
+                    openSidebar(projectProperties);
+                    projectDate = projectProperties.date;
                 });
             })
-        }
+        }   
     ).catch(
         err => console.log(err)
     )

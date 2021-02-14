@@ -19,7 +19,7 @@ function sendTime() {
 setInterval(sendTime, 500);
 
 //Database connection
-const nano = require('nano')('http://localhost:5984'); 
+const nano = require('nano')('http://localhost:5984');
 let projectsDB = nano.db.use('projects');
 
 const bodyParser = require('body-parser');
@@ -29,8 +29,8 @@ app.use(bodyParser.json());
 app.get('/getdata', (req, res) => {
     projectsDB.view('projectsDesignDoc', 'projects-view').then(
         answer => {
-            console.log(answer);
-            answer = answer.rows.map(row => {                
+            /* console.log(answer); */
+            answer = answer.rows.map(row => {
                 return {
                     id: row.id,
                     properties: row.value.properties,
@@ -55,28 +55,20 @@ app.get('/getdata', (req, res) => {
 
 //Add new project to database
 app.post('/saveProject', (req, res) => {
-   
-   // console.log(req.body);
     projectsDB.insert({
-        type: 'FeatureCollection',
-        name: 'points',
-        crs: {
-            type: "name",
-            properties: { name: "urn:ogc:def:crs:EPSG::4326" }
-        },
-        feature: req.body,
+        features: req.body,
         test: 'test'
     }).then(
-        () => projectsDB.view('all_projects', 'proj')
+        () => projectsDB.view('projectsDesignDoc', 'projects-view')
     ).then(
         answer => {
-            
-            //console.log(answer);
+            console.log("ANSWER");
+            console.log(answer);
             answer = answer.rows.map(row => {
                 return {
                     id: row.id,
-                    crs: row.value.crs,
-                    features: row.value.features
+                    properties: row.value.properties,
+                    geometry: row.value.geometry
                 }
             })
 
@@ -97,7 +89,7 @@ app.post('/saveProject', (req, res) => {
 
 })
 
-let server = httpServer.listen(80, err => { 
+let server = httpServer.listen(80, err => {
     let port = server.address().port;
     if (err) console.log(err);
     else console.log(`Listening at: ${port}`);
